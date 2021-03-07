@@ -1,5 +1,6 @@
 package com.github.karvozavr.canvas.canvas
 
+import com.github.karvozavr.canvas.defaultCanvasOfSize
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
@@ -20,5 +21,16 @@ internal class CanvasTest {
     fun `should not create canvas of invalid size`() {
         Canvas.ofSize(width = 0, height = 10).shouldBeNull()
         Canvas.ofSize(width = 1, height = -1).shouldBeNull()
+    }
+
+    @Test
+    fun `should have default pixel value in all pixels`() {
+        val canvas = defaultCanvasOfSize(5, 3, defaultPixelValue = PixelValue('a'))
+
+        for (row in 1..3) {
+            for (col in 1..5) {
+                canvas.pixelAt(row.row, col.col) shouldBe PixelValue('a')
+            }
+        }
     }
 }
