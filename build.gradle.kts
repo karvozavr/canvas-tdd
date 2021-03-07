@@ -70,7 +70,7 @@ subprojects {
             kotlinOptions {
                 jvmTarget = JavaVersion.VERSION_1_8.toString()
                 allWarningsAsErrors = failOnWarning
-                freeCompilerArgs = listOf("-Xjvm-default=enable")
+                freeCompilerArgs = listOf("-Xjvm-default=enable", "-Xinline-classes")
             }
         }
 
