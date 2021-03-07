@@ -1,7 +1,3 @@
-plugins {
-    application
-}
-
 group = "com.github.karvozavr.canvas"
 
 dependencies {
@@ -18,8 +14,4 @@ dependencies {
     testImplementation(Libs.kotest_arrow)
     testImplementation(Libs.junit_engine)
     testImplementation(Libs.junit_params)
-}
-
-application {
-    mainClassName = "MainKt"
 }
