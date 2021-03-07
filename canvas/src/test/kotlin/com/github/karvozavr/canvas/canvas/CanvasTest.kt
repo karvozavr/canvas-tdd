@@ -1,4 +1,5 @@
-import com.github.karvozavr.canvas.canvas.Canvas
+package com.github.karvozavr.canvas.canvas
+
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
