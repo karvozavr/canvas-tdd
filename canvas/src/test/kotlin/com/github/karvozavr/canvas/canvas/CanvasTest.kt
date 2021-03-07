@@ -1,7 +1,7 @@
 package com.github.karvozavr.canvas.canvas
 
 import com.github.karvozavr.canvas.defaultCanvasOfSize
-import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -10,7 +10,7 @@ internal class CanvasTest {
 
     @Test
     fun `should create empty canvas 20x10`() {
-        val canvas = Canvas.ofSize(width=20, height=10)
+        val canvas = Canvas.ofSize(width = 20, height = 10)
         canvas.shouldNotBeNull()
 
         canvas.width shouldBe 20
@@ -19,8 +19,12 @@ internal class CanvasTest {
 
     @Test
     fun `should not create canvas of invalid size`() {
-        Canvas.ofSize(width = 0, height = 10).shouldBeNull()
-        Canvas.ofSize(width = 1, height = -1).shouldBeNull()
+        shouldThrow<RuntimeException> {
+            Canvas.ofSize(width = 0, height = 10)
+        }
+        shouldThrow<RuntimeException> {
+            Canvas.ofSize(width = 1, height = -1)
+        }
     }
 
     @Test
@@ -32,5 +36,24 @@ internal class CanvasTest {
                 canvas.pixelAt(row.row, col.col) shouldBe PixelValue('a')
             }
         }
+    }
+
+    @Test
+    fun `should draw new pixels on canvas`() {
+        val canvas = defaultCanvasOfSize(2, 2, defaultPixelValue = PixelValue('.'))
+
+        val canvasWithDrawing = canvas.draw { setPixelAt ->
+            setPixelAt(1.row, 2.col, PixelValue('a'))
+            setPixelAt(2.row, 1.col, PixelValue('b'))
+        }
+
+        canvasWithDrawing.let {
+            it.pixelAt(1.row, 1.col) shouldBe PixelValue('.')
+            it.pixelAt(1.row, 2.col) shouldBe PixelValue('a')
+            it.pixelAt(2.row, 1.col) shouldBe PixelValue('b')
+            it.pixelAt(2.row, 2.col) shouldBe PixelValue('.')
+        }
+
+        canvas.forEachPixel { _, _, value -> value shouldBe PixelValue('.') }
     }
 }
