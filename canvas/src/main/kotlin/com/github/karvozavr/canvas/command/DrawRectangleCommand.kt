@@ -1,9 +1,6 @@
 package com.github.karvozavr.canvas.command
 
 import com.github.karvozavr.canvas.canvas.*
-import javax.naming.CannotProceedException
-import kotlin.math.max
-import kotlin.math.min
 
 class DrawRectangleCommand internal constructor(
     val upperLeft: CanvasPoint,
@@ -31,6 +28,19 @@ class DrawRectangleCommand internal constructor(
     }
 
     override fun draw(canvas: Canvas): Canvas {
-        TODO("Not yet implemented")
+        val top = DrawLineCommand.lineFromTo(upperLeft, CanvasPoint(upperLeft.row, lowerRight.column))
+        val bottom = DrawLineCommand.lineFromTo(CanvasPoint(lowerRight.row, upperLeft.column), lowerRight)
+        val left = DrawLineCommand.lineFromTo(upperLeft, CanvasPoint(lowerRight.row, upperLeft.column))
+        val right = DrawLineCommand.lineFromTo(lowerRight, CanvasPoint(upperLeft.row, lowerRight.column))
+
+        return canvas.pipe(
+            top::draw,
+            bottom::draw,
+            left::draw,
+            right::draw
+        )
     }
 }
+
+fun <T> T.pipe(vararg functions: (T) -> T): T =
+    functions.fold(this) { value, f -> f(value) }

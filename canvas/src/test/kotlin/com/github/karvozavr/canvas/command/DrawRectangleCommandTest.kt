@@ -1,9 +1,8 @@
 package com.github.karvozavr.canvas.command
 
-import com.github.karvozavr.canvas.canvas.CanvasPoint
-import com.github.karvozavr.canvas.canvas.PixelValue
-import com.github.karvozavr.canvas.canvas.x
-import com.github.karvozavr.canvas.canvas.y
+import com.github.karvozavr.canvas.canvas.*
+import com.github.karvozavr.canvas.defaultCanvasOfSize
+import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -35,5 +34,31 @@ internal class DrawRectangleCommandTest {
         command.upperLeft shouldBe CanvasPoint.of(14.x, 1.y)
         command.lowerRight shouldBe CanvasPoint.of(16.x, 10.y)
         command.pixelValue shouldBe PixelValue('x')
+    }
+
+    @Test
+    fun `should draw a rectangle`() {
+        val canvas = defaultCanvasOfSize(6, 6, PixelValue('.'))
+        val command = DrawRectangleCommand.rectWithCorners(
+            oneCorner = CanvasPoint(2.row, 2.col),
+            otherCorner = CanvasPoint(4.row, 5.col)
+        )
+
+        val canvasWithRectangle = command.draw(canvas)
+
+        val expected = """
+            ......
+            .xxxx.
+            .x..x.
+            .xxxx.
+            ......
+            ......
+        """.trimIndent()
+        val renderedCanvas = AsciiCanvasRenderer()
+            .renderCanvas(canvasWithRectangle)
+            .canvasRows
+            .joinToString(separator = "\n")
+
+        renderedCanvas shouldBe expected
     }
 }
