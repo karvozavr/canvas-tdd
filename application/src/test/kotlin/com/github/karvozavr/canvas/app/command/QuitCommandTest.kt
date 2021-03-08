@@ -9,7 +9,7 @@ internal class QuitCommandTest {
 
     @Test
     fun `should terminate on quit command execution`() {
-        val quitCommand = QuitCommand()
+        val quitCommand = QuitCommand
         shouldThrow<TerminationException> {
             quitCommand.execute(emptyApplicationState())
         }
