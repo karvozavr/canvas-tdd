@@ -23,4 +23,17 @@ internal class DrawRectangleCommandTest {
         command.pixelValue shouldBe PixelValue('x')
     }
 
+    @Test
+    fun `should create correct rectangle from lower left and upper right`() {
+        val lowerLeft = CanvasPoint.of(14.x, 10.y)
+        val upperRight = CanvasPoint.of(16.x, 1.y)
+        val command = DrawRectangleCommand.rectWithCorners(
+            oneCorner = lowerLeft,
+            otherCorner = upperRight
+        )
+
+        command.upperLeft shouldBe CanvasPoint.of(14.x, 1.y)
+        command.lowerRight shouldBe CanvasPoint.of(16.x, 10.y)
+        command.pixelValue shouldBe PixelValue('x')
+    }
 }
