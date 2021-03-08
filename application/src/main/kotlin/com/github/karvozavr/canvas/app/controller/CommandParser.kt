@@ -6,6 +6,6 @@ import com.github.karvozavr.canvas.app.command.QuitCommand
 class CommandParser {
 
     fun parseCommand(userInput: String): Command<out Any>? {
-        return QuitCommand()
+        return QuitCommand
     }
 }
