@@ -6,7 +6,7 @@ import com.github.karvozavr.canvas.canvas.row
 
 inline class CanvasAscii(val canvasRows: List<String>)
 
-class StringCanvasRenderer : CanvasRenderer<CanvasAscii> {
+class AsciiCanvasRenderer : CanvasRenderer<CanvasAscii> {
 
     override fun renderCanvas(canvas: Canvas): CanvasAscii {
         val renderedCanvas = (1..canvas.height).map { row ->

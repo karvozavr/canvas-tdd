@@ -7,7 +7,7 @@ import com.github.karvozavr.canvas.defaultCanvasOfSize
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class StringCanvasRendererTest {
+internal class AsciiCanvasRendererTest {
 
     @Test
     fun `should render default canvas of size 5x3`() {
@@ -18,7 +18,7 @@ internal class StringCanvasRendererTest {
             .....
             .....
         """.trimIndent()
-        val renderedCanvas = StringCanvasRenderer()
+        val renderedCanvas = AsciiCanvasRenderer()
             .renderCanvas(canvas)
             .canvasRows
             .joinToString(separator = "\n")
@@ -41,7 +41,7 @@ internal class StringCanvasRendererTest {
             ..xo.
             a....
         """.trimIndent()
-        val renderedCanvas = StringCanvasRenderer()
+        val renderedCanvas = AsciiCanvasRenderer()
             .renderCanvas(canvasWithDrawing)
             .canvasRows
             .joinToString(separator = "\n")
