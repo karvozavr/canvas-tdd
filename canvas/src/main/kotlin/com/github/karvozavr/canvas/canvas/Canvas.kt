@@ -1,6 +1,6 @@
 package com.github.karvozavr.canvas.canvas
 
-typealias SetPixelAt = (Row, Column, PixelValue) -> Unit
+typealias SetPixelAt = (CanvasPoint, PixelValue) -> Unit
 typealias DrawingFunction = (SetPixelAt) -> Unit
 typealias PixelData = Array<PixelValue>
 
@@ -25,14 +25,15 @@ class Canvas internal constructor(
         }
     }
 
-    fun pixelAt(row: Row, col: Column): PixelValue {
-        return pixelData.getPixelValue(row, col)
+    fun pixelAt(canvasPoint: CanvasPoint): PixelValue {
+        return pixelData.getPixelValue(canvasPoint)
     }
 
-    fun forEachPixel(func: (row: Row, col: Column, value: PixelValue) -> Unit) {
+    fun forEachPixel(func: (CanvasPoint, PixelValue) -> Unit) {
         for (rowIdx in 1..height) {
             for (colIdx in 1..width) {
-                func(rowIdx.row, colIdx.col, pixelData.getPixelValue(rowIdx.row, colIdx.col))
+                val point = CanvasPoint.of(rowIdx.row, colIdx.col)
+                func(point, pixelData.getPixelValue(point))
             }
         }
     }
@@ -40,8 +41,8 @@ class Canvas internal constructor(
     fun draw(drawingFunction: DrawingFunction): Canvas {
         val newPixelData = pixelData.copyOf()
 
-        val setPixelAt = { row: Row, col: Column, value: PixelValue ->
-            newPixelData.setPixelValue(row, col, value)
+        val setPixelAt = { canvasPoint: CanvasPoint, value: PixelValue ->
+            newPixelData.setPixelValue(canvasPoint, value)
         }
 
         drawingFunction(setPixelAt)
@@ -49,23 +50,23 @@ class Canvas internal constructor(
         return Canvas(width = width, height = height, pixelData = newPixelData)
     }
 
-    private fun PixelData.getPixelValue(row: Row, col: Column): PixelValue {
-        validateRowAndColumn(row, col)
-        return this[(row.row - 1) * width + col.column - 1]
+    private fun PixelData.getPixelValue(canvasPoint: CanvasPoint): PixelValue {
+        validatePoint(canvasPoint)
+        return this[(canvasPoint.row.row - 1) * width + canvasPoint.column.column - 1]
     }
 
-    private fun PixelData.setPixelValue(row: Row, col: Column, value: PixelValue) {
-        validateRowAndColumn(row, col)
-        this[(row.row - 1) * width + col.column - 1] = value
+    private fun PixelData.setPixelValue(canvasPoint: CanvasPoint, value: PixelValue) {
+        validatePoint(canvasPoint)
+        this[(canvasPoint.row.row - 1) * width + canvasPoint.column.column - 1] = value
     }
 
-    private fun validateRowAndColumn(row: Row, col: Column) {
-        val rowIsValid = row.row in 1..height
+    private fun validatePoint(canvasPoint: CanvasPoint) {
+        val rowIsValid = canvasPoint.row.row in 1..height
         if (!rowIsValid) {
             throw RuntimeException("Row values should be in range 1..height")
         }
 
-        val columnIsValid = col.column in 1..width
+        val columnIsValid = canvasPoint.column.column in 1..width
         if (!columnIsValid) {
             throw RuntimeException("Column values should be in range 1..width")
         }

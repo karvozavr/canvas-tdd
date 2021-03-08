@@ -33,7 +33,7 @@ internal class CanvasTest {
 
         for (row in 1..3) {
             for (col in 1..5) {
-                canvas.pixelAt(row.row, col.col) shouldBe PixelValue('a')
+                canvas.pixelAt(CanvasPoint.of(row.row, col.col)) shouldBe PixelValue('a')
             }
         }
     }
@@ -43,17 +43,17 @@ internal class CanvasTest {
         val canvas = defaultCanvasOfSize(2, 2, defaultPixelValue = PixelValue('.'))
 
         val canvasWithDrawing = canvas.draw { setPixelAt ->
-            setPixelAt(1.row, 2.col, PixelValue('a'))
-            setPixelAt(2.row, 1.col, PixelValue('b'))
+            setPixelAt(CanvasPoint.of(1.row, 2.col), PixelValue('a'))
+            setPixelAt(CanvasPoint.of(2.row, 1.col), PixelValue('b'))
         }
 
         canvasWithDrawing.let {
-            it.pixelAt(1.row, 1.col) shouldBe PixelValue('.')
-            it.pixelAt(1.row, 2.col) shouldBe PixelValue('a')
-            it.pixelAt(2.row, 1.col) shouldBe PixelValue('b')
-            it.pixelAt(2.row, 2.col) shouldBe PixelValue('.')
+            it.pixelAt(CanvasPoint.of(1.row, 1.col)) shouldBe PixelValue('.')
+            it.pixelAt(CanvasPoint.of(1.row, 2.col)) shouldBe PixelValue('a')
+            it.pixelAt(CanvasPoint.of(2.row, 1.col)) shouldBe PixelValue('b')
+            it.pixelAt(CanvasPoint.of(2.row, 2.col)) shouldBe PixelValue('.')
         }
 
-        canvas.forEachPixel { _, _, value -> value shouldBe PixelValue('.') }
+        canvas.forEachPixel { _, value -> value shouldBe PixelValue('.') }
     }
 }

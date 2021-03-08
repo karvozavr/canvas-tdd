@@ -1,5 +1,6 @@
 package com.github.karvozavr.canvas.renderer
 
+import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.canvas.col
 import com.github.karvozavr.canvas.canvas.row
@@ -31,9 +32,9 @@ internal class AsciiCanvasRendererTest {
         val canvas = defaultCanvasOfSize(5, 3, PixelValue('.'))
 
         val canvasWithDrawing = canvas.draw { setPixelAt ->
-            setPixelAt(2.row, 3.col, PixelValue('x'))
-            setPixelAt(2.row, 4.col, PixelValue('o'))
-            setPixelAt(3.row, 1.col, PixelValue('a'))
+            setPixelAt(CanvasPoint.of(2.row, 3.col), PixelValue('x'))
+            setPixelAt(CanvasPoint.of(2.row, 4.col), PixelValue('o'))
+            setPixelAt(CanvasPoint.of(3.row, 1.col), PixelValue('a'))
         }
 
         val expected = """

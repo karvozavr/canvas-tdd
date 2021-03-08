@@ -27,15 +27,21 @@ data class DrawLineCommand internal constructor(
 
     fun draw(canvas: Canvas): Canvas = canvas.draw { setPixelAt ->
         if (from.row == to.row) {
-            val columnStart = minOf(from.column.column, to.column.column)
-            val columnEnd = maxOf(from.column.column, to.column.column)
-
-            (columnStart..columnEnd).map { setPixelAt(from.row, it.col, pixelValue) }
+            drawHorizontalLine(setPixelAt)
         } else if (from.column == to.column) {
-            val rowStart = minOf(from.row.row, to.row.row)
-            val rowEnd = maxOf(from.row.row, to.row.row)
-
-            (rowStart..rowEnd).map { setPixelAt(it.row, from.column, pixelValue) }
+            drawVerticalLine(setPixelAt)
         }
+    }
+
+    private fun drawHorizontalLine(setPixelAt: SetPixelAt) {
+        val columnStart = minOf(from.column.column, to.column.column)
+        val columnEnd = maxOf(from.column.column, to.column.column)
+        (columnStart..columnEnd).map { setPixelAt(CanvasPoint.of(from.row, it.col), pixelValue) }
+    }
+
+    private fun drawVerticalLine(setPixelAt: SetPixelAt) {
+        val rowStart = minOf(from.row.row, to.row.row)
+        val rowEnd = maxOf(from.row.row, to.row.row)
+        (rowStart..rowEnd).map { setPixelAt(CanvasPoint.of(it.row, from.column), pixelValue) }
     }
 }
