@@ -18,6 +18,8 @@ dependencies {
     testImplementation(Libs.kotest_arrow)
     testImplementation(Libs.junit_engine)
     testImplementation(Libs.junit_params)
+
+    implementation(project(":canvas"))
 }
 
 application {
