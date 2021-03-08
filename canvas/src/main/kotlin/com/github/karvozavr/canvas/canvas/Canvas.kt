@@ -2,7 +2,6 @@ package com.github.karvozavr.canvas.canvas
 
 typealias SetPixelAt = (Row, Column, PixelValue) -> Unit
 typealias DrawingFunction = (SetPixelAt) -> Unit
-
 typealias PixelData = Array<PixelValue>
 
 class Canvas internal constructor(
