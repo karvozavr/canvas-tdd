@@ -6,7 +6,7 @@ data class DrawLineCommand internal constructor(
     val from: CanvasPoint,
     val to: CanvasPoint,
     val pixelValue: PixelValue
-) {
+) : DrawingCommand {
 
     companion object {
         fun lineFromTo(
@@ -25,7 +25,7 @@ data class DrawLineCommand internal constructor(
         }
     }
 
-    fun draw(canvas: Canvas): Canvas = canvas.draw { setPixelAt ->
+    override fun draw(canvas: Canvas): Canvas = canvas.draw { setPixelAt ->
         if (from.row == to.row) {
             drawHorizontalLine(setPixelAt)
         } else if (from.column == to.column) {
