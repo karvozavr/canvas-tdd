@@ -23,5 +23,10 @@ dependencies {
 }
 
 application {
+    applicationName = "canvas-app"
     mainClassName = "MainKt"
+}
+
+tasks.getByName<JavaExec>("run") {
+    standardInput = System.`in`
 }

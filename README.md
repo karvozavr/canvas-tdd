@@ -3,5 +3,15 @@
 ## Build and run
 
 ```bash
-./gradlew run
+./gradlew build
+```
+
+Extract distribution
+```bash
+unzip application/build/distributions/canvas-app.zip
+```
+
+Run
+```angular2html
+./canvas-app/bin/application
 ```
