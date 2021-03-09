@@ -42,7 +42,7 @@ internal class CanvasTest {
     fun `should draw new pixels on canvas`() {
         val canvas = defaultCanvasOfSize(2, 2, defaultPixelValue = PixelValue('.'))
 
-        val canvasWithDrawing = canvas.draw { setPixelAt ->
+        val canvasWithDrawing = canvas.draw { setPixelAt, _ ->
             setPixelAt(CanvasPoint.of(1.row, 2.col), PixelValue('a'))
             setPixelAt(CanvasPoint.of(2.row, 1.col), PixelValue('b'))
         }
@@ -52,6 +52,23 @@ internal class CanvasTest {
             it.pixelAt(CanvasPoint.of(1.row, 2.col)) shouldBe PixelValue('a')
             it.pixelAt(CanvasPoint.of(2.row, 1.col)) shouldBe PixelValue('b')
             it.pixelAt(CanvasPoint.of(2.row, 2.col)) shouldBe PixelValue('.')
+        }
+
+        canvas.forEachPixel { _, value -> value shouldBe PixelValue('.') }
+    }
+
+    @Test
+    fun `should return consistent values from getPixelAt while drawing`() {
+        val canvas = defaultCanvasOfSize(2, 1, defaultPixelValue = PixelValue('.'))
+
+        val canvasWithDrawing = canvas.draw { setPixelAt, getPixelAt ->
+            setPixelAt(CanvasPoint.of(1.row, 2.col), PixelValue('a'))
+            getPixelAt(CanvasPoint.of(1.row, 2.col)) shouldBe PixelValue('a')
+        }
+
+        canvasWithDrawing.let {
+            it.pixelAt(CanvasPoint.of(1.row, 1.col)) shouldBe PixelValue('.')
+            it.pixelAt(CanvasPoint.of(1.row, 2.col)) shouldBe PixelValue('a')
         }
 
         canvas.forEachPixel { _, value -> value shouldBe PixelValue('.') }

@@ -1,7 +1,8 @@
 package com.github.karvozavr.canvas.canvas
 
 typealias SetPixelAt = (CanvasPoint, PixelValue) -> Unit
-typealias DrawingFunction = (SetPixelAt) -> Unit
+typealias GetPixelAt = (CanvasPoint) -> PixelValue
+typealias DrawingFunction = (SetPixelAt, GetPixelAt) -> Unit
 typealias PixelData = Array<PixelValue>
 
 class Canvas internal constructor(
@@ -46,7 +47,11 @@ class Canvas internal constructor(
             newPixelData.setPixelValue(canvasPoint, value)
         }
 
-        drawingFunction(setPixelAt)
+        val getPixelAt = { canvasPoint: CanvasPoint ->
+            newPixelData.getPixelValue(canvasPoint)
+        }
+
+        drawingFunction(setPixelAt, getPixelAt)
 
         return Canvas(width = width, height = height, pixelData = newPixelData)
     }

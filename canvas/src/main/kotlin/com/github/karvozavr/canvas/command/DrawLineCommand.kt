@@ -30,7 +30,7 @@ data class DrawLineCommand internal constructor(
         }
     }
 
-    override fun draw(canvas: Canvas): Canvas = canvas.draw { setPixelAt ->
+    override fun draw(canvas: Canvas): Canvas = canvas.draw { setPixelAt, _ ->
         if (from.row == to.row) {
             drawHorizontalLine(setPixelAt)
         } else if (from.column == to.column) {

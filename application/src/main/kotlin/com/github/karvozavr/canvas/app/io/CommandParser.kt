@@ -14,7 +14,7 @@ import com.github.karvozavr.canvas.canvas.y
 class CommandParser {
 
     fun parseCommand(userInput: String): Command? {
-        val tokens = userInput.split(Regex("\\s+"))
+        val tokens = userInput.trim().split(Regex("\\s+"))
         if (tokens.isEmpty()) return null
 
         val commandName = tokens[0]

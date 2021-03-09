@@ -31,7 +31,7 @@ internal class AsciiCanvasRendererTest {
     fun `should render canvas with drawing`() {
         val canvas = defaultCanvasOfSize(5, 3, PixelValue('.'))
 
-        val canvasWithDrawing = canvas.draw { setPixelAt ->
+        val canvasWithDrawing = canvas.draw { setPixelAt, _ ->
             setPixelAt(CanvasPoint.of(2.row, 3.col), PixelValue('x'))
             setPixelAt(CanvasPoint.of(2.row, 4.col), PixelValue('o'))
             setPixelAt(CanvasPoint.of(3.row, 1.col), PixelValue('a'))

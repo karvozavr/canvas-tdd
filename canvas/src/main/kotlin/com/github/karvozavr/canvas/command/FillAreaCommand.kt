@@ -4,6 +4,7 @@ import com.github.karvozavr.canvas.canvas.Canvas
 import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.canvas.SetPixelAt
+import com.github.karvozavr.canvas.canvas.GetPixelAt
 import com.github.karvozavr.canvas.canvas.row
 import com.github.karvozavr.canvas.canvas.col
 
@@ -20,12 +21,12 @@ class FillAreaCommand internal constructor(
     }
 
     override fun draw(canvas: Canvas): Canvas {
-        return canvas.draw { setPixelAt ->
-            fillAreaBreadthFirst(canvas, setPixelAt)
+        return canvas.draw { setPixelAt, getPixelAt ->
+            fillAreaBreadthFirst(canvas, setPixelAt, getPixelAt)
         }
     }
 
-    private fun fillAreaBreadthFirst(canvas: Canvas, setPixelAt: SetPixelAt) {
+    private fun fillAreaBreadthFirst(canvas: Canvas, setPixelAt: SetPixelAt, getPixelAt: GetPixelAt) {
         val color = canvas.pixelAt(initialPoint)
         val processed = mutableSetOf<CanvasPoint>()
         val queue = ArrayDeque<CanvasPoint>()
@@ -34,17 +35,17 @@ class FillAreaCommand internal constructor(
         while (queue.isNotEmpty()) {
             val point = queue.removeFirst()
             setPixelAt(point, pixelValue)
-            processed.add(point)
-            addNeighboursOfPointToQueue(point, queue, processed, canvas, color)
+            addNeighboursOfPointToQueue(point, queue, processed, canvas, color, getPixelAt)
         }
     }
 
     private fun addNeighboursOfPointToQueue(
         point: CanvasPoint,
         queue: ArrayDeque<CanvasPoint>,
-        processed: Set<CanvasPoint>,
+        processed: MutableSet<CanvasPoint>,
         canvas: Canvas,
-        color: PixelValue
+        color: PixelValue,
+        getPixelAt: GetPixelAt
     ) {
         val pointRow = point.row.row
         val pointCol = point.column.column
@@ -56,9 +57,10 @@ class FillAreaCommand internal constructor(
             pointRow to pointCol + 1,
         )
 
-        neighbors
+        neighbors.asSequence()
             .mapNotNull { (row, col) -> canvasPointIfValid(row, col, canvas) }
-            .filter { canvas.pixelAt(it) == color && !processed.contains(it) }
+            .filter { getPixelAt(it) == color && !processed.contains(it) }
+            .onEach { processed.add(it) }
             .forEach(queue::addLast)
     }
 

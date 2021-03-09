@@ -32,7 +32,7 @@ fun canvasFromString(canvas: String): Canvas {
         .toTypedArray()
 
     val newCanvas = Canvas.ofSize(width, height)
-    return newCanvas.draw { setPixelAt ->
+    return newCanvas.draw { setPixelAt, _ ->
         var i = 0
         newCanvas.forEachPixel { point, color ->
             setPixelAt(point, pixelData[i++])
