@@ -1,4 +1,4 @@
-package com.github.karvozavr.canvas.app.command
+package com.github.karvozavr.canvas.app
 
 import com.github.karvozavr.canvas.canvas.Canvas
 

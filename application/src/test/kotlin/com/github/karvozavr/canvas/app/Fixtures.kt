@@ -1,6 +1,5 @@
 package com.github.karvozavr.canvas.app
 
-import com.github.karvozavr.canvas.app.command.ApplicationState
 import com.github.karvozavr.canvas.canvas.Canvas
 import com.github.karvozavr.canvas.canvas.PixelValue
 import io.kotest.matchers.nulls.shouldNotBeNull

@@ -6,12 +6,11 @@ import com.github.karvozavr.canvas.app.command.QuitCommand
 
 class CommandParser {
 
-    fun parseCommand(userInput: String): Command<out Any>? {
+    fun parseCommand(userInput: String): Command? {
         val tokens = userInput.split(Regex("\\s+"))
         if (tokens.isEmpty()) return null
 
         val commandName = tokens[0]
-
         return when (commandName) {
             "Q" -> QuitCommand
             "C" -> parseCreateCanvasCommand(tokens)

@@ -39,4 +39,9 @@ internal class CanvasCLIApplicationTest {
 
         app.start()
     }
+
+    @Test
+    fun `should draw line`() {
+
+    }
 }

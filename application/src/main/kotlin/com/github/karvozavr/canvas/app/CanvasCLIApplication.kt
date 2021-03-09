@@ -1,7 +1,7 @@
 package com.github.karvozavr.canvas.app
 
-import com.github.karvozavr.canvas.app.command.ApplicationState
 import com.github.karvozavr.canvas.app.command.Command
+import com.github.karvozavr.canvas.app.command.CommandError
 import com.github.karvozavr.canvas.app.controller.CommandParser
 import com.github.karvozavr.canvas.app.controller.TextOutputReceiver
 import com.github.karvozavr.canvas.app.controller.UserInputProvider
@@ -45,7 +45,7 @@ class CanvasCLIApplication(
         textOutputReceiver.println(INVALID_COMMAND_MESSAGE)
     }
 
-    private fun getCommandFromUser(): Command<out Any>? {
+    private fun getCommandFromUser(): Command? {
         textOutputReceiver.print("> ")
         val userInput = userInputProvider.getUserInput() ?: return null
         return commandParser.parseCommand(userInput)
