@@ -1,6 +1,6 @@
 package com.github.karvozavr.canvas.app
 
-import com.github.karvozavr.canvas.app.controller.CommandParser
+import com.github.karvozavr.canvas.app.io.CommandParser
 import com.github.karvozavr.canvas.app.view.AsciiFramedCanvasPresenter
 import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
 import org.junit.jupiter.api.Test

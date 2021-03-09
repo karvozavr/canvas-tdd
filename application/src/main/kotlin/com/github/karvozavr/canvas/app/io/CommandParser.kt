@@ -1,4 +1,4 @@
-package com.github.karvozavr.canvas.app.controller
+package com.github.karvozavr.canvas.app.io
 
 import com.github.karvozavr.canvas.app.command.Command
 import com.github.karvozavr.canvas.app.command.bucket.BucketCommand

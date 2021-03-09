@@ -1,6 +1,6 @@
 package com.github.karvozavr.canvas.app
 
-import com.github.karvozavr.canvas.app.controller.UserInputProvider
+import com.github.karvozavr.canvas.app.io.UserInputProvider
 
 class TestUserInputProvider(private val inputs: List<String>) : UserInputProvider {
 

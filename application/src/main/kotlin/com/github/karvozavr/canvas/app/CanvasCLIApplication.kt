@@ -1,10 +1,9 @@
 package com.github.karvozavr.canvas.app
 
 import com.github.karvozavr.canvas.app.command.Command
-import com.github.karvozavr.canvas.app.command.CommandError
-import com.github.karvozavr.canvas.app.controller.CommandParser
-import com.github.karvozavr.canvas.app.controller.TextOutputReceiver
-import com.github.karvozavr.canvas.app.controller.UserInputProvider
+import com.github.karvozavr.canvas.app.io.CommandParser
+import com.github.karvozavr.canvas.app.io.TextOutputReceiver
+import com.github.karvozavr.canvas.app.io.UserInputProvider
 import com.github.karvozavr.canvas.app.view.CanvasPresenter
 import com.github.karvozavr.canvas.app.view.CanvasTextView
 

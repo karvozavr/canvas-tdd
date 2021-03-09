@@ -1,4 +1,4 @@
-package com.github.karvozavr.canvas.app.controller
+package com.github.karvozavr.canvas.app.io
 
 interface TextOutputReceiver {
 

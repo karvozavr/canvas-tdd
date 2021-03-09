@@ -1,6 +1,6 @@
 package com.github.karvozavr.canvas.app
 
-import com.github.karvozavr.canvas.app.controller.TextOutputReceiver
+import com.github.karvozavr.canvas.app.io.TextOutputReceiver
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.fail
 
