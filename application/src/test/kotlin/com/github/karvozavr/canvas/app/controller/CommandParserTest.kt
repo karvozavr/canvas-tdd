@@ -2,6 +2,7 @@ package com.github.karvozavr.canvas.app.controller
 
 import com.github.karvozavr.canvas.app.command.createCanvas.CreateCanvasCommand
 import com.github.karvozavr.canvas.app.command.drawLine.LineCommand
+import com.github.karvozavr.canvas.app.command.drawRect.RectCommand
 import com.github.karvozavr.canvas.app.command.quit.QuitCommand
 import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.x
@@ -37,6 +38,15 @@ internal class CommandParserTest {
         val command = commandParser.parseCommand("L 2 3 5 3")
 
         command shouldBe LineCommand(CanvasPoint.of(2.x, 3.y), CanvasPoint.of(5.x, 3.y))
+    }
+
+    @Test
+    fun `should parse Rect command`() {
+        val commandParser = CommandParser()
+
+        val command = commandParser.parseCommand("R 2 3 5 4")
+
+        command shouldBe RectCommand(CanvasPoint.of(2.x, 3.y), CanvasPoint.of(5.x, 4.y))
     }
 
     @Test
