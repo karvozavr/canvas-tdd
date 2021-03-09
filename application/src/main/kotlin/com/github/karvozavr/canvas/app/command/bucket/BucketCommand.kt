@@ -6,14 +6,12 @@ import arrow.core.right
 import com.github.karvozavr.canvas.app.ApplicationState
 import com.github.karvozavr.canvas.app.command.Command
 import com.github.karvozavr.canvas.app.command.CommandError
-import com.github.karvozavr.canvas.app.command.drawRect.CanvasDoesNotExist
-import com.github.karvozavr.canvas.app.command.drawRect.PointIsOutOfCanvas
 import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.command.FillAreaCommand
 import com.github.karvozavr.canvas.isPointOnCanvas
 
-class BucketCommand(
+data class BucketCommand(
     private val initialPoint: CanvasPoint,
     private val color: PixelValue
 ) : Command {

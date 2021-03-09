@@ -1,10 +1,12 @@
 package com.github.karvozavr.canvas.app.controller
 
+import com.github.karvozavr.canvas.app.command.bucket.BucketCommand
 import com.github.karvozavr.canvas.app.command.createCanvas.CreateCanvasCommand
 import com.github.karvozavr.canvas.app.command.drawLine.LineCommand
 import com.github.karvozavr.canvas.app.command.drawRect.RectCommand
 import com.github.karvozavr.canvas.app.command.quit.QuitCommand
 import com.github.karvozavr.canvas.canvas.CanvasPoint
+import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.canvas.x
 import com.github.karvozavr.canvas.canvas.y
 import io.kotest.matchers.nulls.shouldBeNull
@@ -47,6 +49,15 @@ internal class CommandParserTest {
         val command = commandParser.parseCommand("R 2 3 5 4")
 
         command shouldBe RectCommand(CanvasPoint.of(2.x, 3.y), CanvasPoint.of(5.x, 4.y))
+    }
+
+    @Test
+    fun `should parse Bucket command`() {
+        val commandParser = CommandParser()
+
+        val command = commandParser.parseCommand("B 2 3 o")
+
+        command shouldBe BucketCommand(CanvasPoint.of(2.x, 3.y), PixelValue('o'))
     }
 
     @Test
