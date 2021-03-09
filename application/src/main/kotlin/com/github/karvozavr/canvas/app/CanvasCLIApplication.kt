@@ -9,11 +9,13 @@ import com.github.karvozavr.canvas.app.view.CanvasPresenter
 import com.github.karvozavr.canvas.app.view.CanvasTextView
 
 const val INVALID_COMMAND_MESSAGE = "Invalid command"
+const val CLI_PROMPT = "enter command: "
 
 class CanvasCLIApplication(
     private val commandParser: CommandParser,
     private val userInputProvider: UserInputProvider,
     private val textOutputReceiver: TextOutputReceiver,
+    private val textErrorOutputReceiver: TextOutputReceiver,
     private val canvasPresenter: CanvasPresenter<CanvasTextView>
 ) {
 
@@ -33,20 +35,24 @@ class CanvasCLIApplication(
                 break
             }
 
-            result.map {
-                applicationState = it
-                val canvasTextView = canvasPresenter.present(applicationState.canvas!!)
-                textOutputReceiver.println(canvasTextView.text)
-            }
+            result
+                .mapLeft {
+                    textErrorOutputReceiver.println(it.errorText())
+                }
+                .map {
+                    applicationState = it
+                    val canvasTextView = canvasPresenter.present(applicationState.canvas!!)
+                    textOutputReceiver.println(canvasTextView.text)
+                }
         }
     }
 
     private fun reportParsingError() {
-        textOutputReceiver.println(INVALID_COMMAND_MESSAGE)
+        textErrorOutputReceiver.println(INVALID_COMMAND_MESSAGE)
     }
 
     private fun getCommandFromUser(): Command? {
-        textOutputReceiver.print("> ")
+        textOutputReceiver.print(CLI_PROMPT)
         val userInput = userInputProvider.getUserInput() ?: return null
         return commandParser.parseCommand(userInput)
     }
