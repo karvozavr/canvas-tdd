@@ -8,6 +8,8 @@ import com.github.karvozavr.canvas.app.controller.UserInputProvider
 import com.github.karvozavr.canvas.app.view.CanvasPresenter
 import com.github.karvozavr.canvas.app.view.CanvasTextView
 
+const val INVALID_COMMAND_MESSAGE = "Invalid command"
+
 class CanvasCLIApplication(
     private val commandParser: CommandParser,
     private val userInputProvider: UserInputProvider,
@@ -40,7 +42,7 @@ class CanvasCLIApplication(
     }
 
     private fun reportParsingError() {
-        TODO("Not implemented")
+        textOutputReceiver.println(INVALID_COMMAND_MESSAGE)
     }
 
     private fun getCommandFromUser(): Command<out Any>? {

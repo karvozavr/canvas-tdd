@@ -27,4 +27,16 @@ internal class CanvasCLIApplicationTest {
 
         app.start()
     }
+
+    @Test
+    fun `should report parsing error and continue`() {
+        val app = CanvasCLIApplication(
+            commandParser = CommandParser(),
+            userInputProvider = TestUserInputProvider(listOf("42a sfd as aaaaaa saf", "Q")),
+            textOutputReceiver = TestTextOutputReceiver(listOf("> ", "$INVALID_COMMAND_MESSAGE\n", "> ")),
+            canvasPresenter = AsciiFramedCanvasPresenter(AsciiCanvasRenderer())
+        )
+
+        app.start()
+    }
 }
