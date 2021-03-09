@@ -1,7 +1,7 @@
 package com.github.karvozavr.canvas.app.controller
 
-import com.github.karvozavr.canvas.app.command.CreateCanvasCommand
-import com.github.karvozavr.canvas.app.command.QuitCommand
+import com.github.karvozavr.canvas.app.command.createCanvas.CreateCanvasCommand
+import com.github.karvozavr.canvas.app.command.quit.QuitCommand
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

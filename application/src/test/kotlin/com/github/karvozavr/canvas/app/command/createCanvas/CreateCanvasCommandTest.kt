@@ -1,4 +1,4 @@
-package com.github.karvozavr.canvas.app.command
+package com.github.karvozavr.canvas.app.command.createCanvas
 
 import com.github.karvozavr.canvas.app.emptyApplicationState
 import io.kotest.assertions.arrow.either.shouldBeLeft

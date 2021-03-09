@@ -1,9 +1,11 @@
-package com.github.karvozavr.canvas.app.command
+package com.github.karvozavr.canvas.app.command.drawLine
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import com.github.karvozavr.canvas.app.ApplicationState
+import com.github.karvozavr.canvas.app.command.Command
+import com.github.karvozavr.canvas.app.command.CommandError
 import com.github.karvozavr.canvas.canvas.Canvas
 import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue

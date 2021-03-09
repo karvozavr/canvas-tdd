@@ -1,9 +1,11 @@
-package com.github.karvozavr.canvas.app.command
+package com.github.karvozavr.canvas.app.command.createCanvas
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import com.github.karvozavr.canvas.app.ApplicationState
+import com.github.karvozavr.canvas.app.command.Command
+import com.github.karvozavr.canvas.app.command.CommandError
 import com.github.karvozavr.canvas.canvas.Canvas
 
 data class CreateCanvasCommand(val width: Int, val height: Int) : Command {

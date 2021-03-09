@@ -1,8 +1,8 @@
 package com.github.karvozavr.canvas.app.controller
 
 import com.github.karvozavr.canvas.app.command.Command
-import com.github.karvozavr.canvas.app.command.CreateCanvasCommand
-import com.github.karvozavr.canvas.app.command.QuitCommand
+import com.github.karvozavr.canvas.app.command.createCanvas.CreateCanvasCommand
+import com.github.karvozavr.canvas.app.command.quit.QuitCommand
 
 class CommandParser {
 
