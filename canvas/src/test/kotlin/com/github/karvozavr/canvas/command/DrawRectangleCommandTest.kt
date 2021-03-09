@@ -54,11 +54,6 @@ internal class DrawRectangleCommandTest {
             ......
             ......
         """.trimIndent()
-        val renderedCanvas = AsciiCanvasRenderer()
-            .renderCanvas(canvasWithRectangle)
-            .canvasRows
-            .joinToString(separator = "\n")
-
-        renderedCanvas shouldBe expected
+        AsciiCanvasRenderer().renderCanvas(canvasWithRectangle).toString() shouldBe expected
     }
 }

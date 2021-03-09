@@ -14,7 +14,7 @@ internal class DrawLineCommandTest {
         // given
         val canvas = defaultCanvasOfSize(5, 3, PixelValue('.'))
         val command = DrawLineCommand.lineFromTo(
-            from =CanvasPoint.of(1.row, 2.col),
+            from = CanvasPoint.of(1.row, 2.col),
             to = CanvasPoint.of(4.x, 1.y),
             pixelValue = PixelValue('x')
         )
@@ -28,12 +28,7 @@ internal class DrawLineCommandTest {
             .....
             .....
         """.trimIndent()
-        val renderedCanvas = AsciiCanvasRenderer()
-            .renderCanvas(canvasWithLine)
-            .canvasRows
-            .joinToString(separator = "\n")
-
-        renderedCanvas shouldBe expected
+        AsciiCanvasRenderer().renderCanvas(canvasWithLine).toString() shouldBe expected
     }
 
     @Test
@@ -48,7 +43,7 @@ internal class DrawLineCommandTest {
         // given
         val canvas = defaultCanvasOfSize(5, 3, PixelValue('.'))
         val command = DrawLineCommand.lineFromTo(
-            from =CanvasPoint.of(1.row, 2.col),
+            from = CanvasPoint.of(1.row, 2.col),
             to = CanvasPoint.of(2.x, 3.y),
             pixelValue = PixelValue('x')
         )
@@ -62,11 +57,6 @@ internal class DrawLineCommandTest {
             .x...
             .x...
         """.trimIndent()
-        val renderedCanvas = AsciiCanvasRenderer()
-            .renderCanvas(canvasWithLine)
-            .canvasRows
-            .joinToString(separator = "\n")
-
-        renderedCanvas shouldBe expected
+        AsciiCanvasRenderer().renderCanvas(canvasWithLine).toString() shouldBe expected
     }
 }
