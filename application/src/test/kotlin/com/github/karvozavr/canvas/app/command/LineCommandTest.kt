@@ -4,6 +4,7 @@ import com.github.karvozavr.canvas.app.ApplicationState
 import com.github.karvozavr.canvas.app.defaultCanvasOfSize
 import com.github.karvozavr.canvas.canvas.*
 import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
+import io.kotest.assertions.arrow.either.shouldBeLeft
 import io.kotest.assertions.arrow.either.shouldBeRight
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
@@ -31,5 +32,31 @@ internal class LineCommandTest {
             .....
         """.trimIndent()
         AsciiCanvasRenderer().renderCanvas(newCanvas).toString() shouldBe expected
+    }
+
+    @Test
+    fun `should report error for diagonal line`() {
+        val canvas = defaultCanvasOfSize(5, 5, PixelValue('.'))
+        val appState = ApplicationState(canvas)
+        val command = LineCommand(from = CanvasPoint.of(1.row, 2.col), to = CanvasPoint.of(3.x, 4.y))
+
+        command.execute(appState).shouldBeLeft(LineIsNotHorizontalOrVertical)
+    }
+
+    @Test
+    fun `should report error for non-existing canvas`() {
+        val appState = ApplicationState(null)
+        val command = LineCommand(from = CanvasPoint.of(1.row, 2.col), to = CanvasPoint.of(3.x, 4.y))
+
+        command.execute(appState).shouldBeLeft(CanvasDoesNotExist)
+    }
+
+    @Test
+    fun `should report error for point out of canvas`() {
+        val canvas = defaultCanvasOfSize(5, 5, PixelValue('.'))
+        val appState = ApplicationState(canvas)
+        val command = LineCommand(from = CanvasPoint.of(42.row, 2.col), to = CanvasPoint.of(2.x, 42.y))
+
+        command.execute(appState).shouldBeLeft(PointIsOutOfCanvas)
     }
 }
