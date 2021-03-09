@@ -5,6 +5,6 @@ interface TextOutputReceiver {
     fun print(textData: String)
 
     fun println(textData: String) {
-        println(textData + "\n")
+        print(textData + "\n")
     }
 }

@@ -5,13 +5,14 @@ import com.github.karvozavr.canvas.app.command.Command
 import com.github.karvozavr.canvas.app.controller.CommandParser
 import com.github.karvozavr.canvas.app.controller.TextOutputReceiver
 import com.github.karvozavr.canvas.app.controller.UserInputProvider
-import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
+import com.github.karvozavr.canvas.app.view.CanvasPresenter
+import com.github.karvozavr.canvas.app.view.CanvasTextView
 
 class CanvasCLIApplication(
     private val commandParser: CommandParser,
     private val userInputProvider: UserInputProvider,
     private val textOutputReceiver: TextOutputReceiver,
-    private val canvasRenderer: AsciiCanvasRenderer
+    private val canvasPresenter: CanvasPresenter<CanvasTextView>
 ) {
 
     fun start() {
@@ -32,8 +33,8 @@ class CanvasCLIApplication(
 
             result.map {
                 applicationState = it
-                val rendered = canvasRenderer.renderCanvas(applicationState.canvas!!).canvasRows.joinToString("\n")
-                textOutputReceiver.print(rendered) // TODO
+                val canvasTextView = canvasPresenter.present(applicationState.canvas!!)
+                textOutputReceiver.println(canvasTextView.text)
             }
         }
     }

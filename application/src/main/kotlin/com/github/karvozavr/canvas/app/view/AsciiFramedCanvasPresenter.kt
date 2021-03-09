@@ -3,8 +3,6 @@ package com.github.karvozavr.canvas.app.view
 import com.github.karvozavr.canvas.canvas.Canvas
 import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
 
-inline class CanvasTextView(val text: String)
-
 class AsciiFramedCanvasPresenter(
     private val asciiCanvasRenderer: AsciiCanvasRenderer
 ) : CanvasPresenter<CanvasTextView> {

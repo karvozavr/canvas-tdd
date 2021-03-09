@@ -5,7 +5,12 @@ import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.col
 import com.github.karvozavr.canvas.canvas.row
 
-inline class CanvasAscii(val canvasRows: List<String>)
+inline class CanvasAscii(val canvasRows: List<String>) {
+
+    override fun toString(): String {
+        return canvasRows.joinToString("\n")
+    }
+}
 
 class AsciiCanvasRenderer : CanvasRenderer<CanvasAscii> {
 
