@@ -1,6 +1,11 @@
 package com.github.karvozavr.canvas.command
 
-import com.github.karvozavr.canvas.canvas.*
+import com.github.karvozavr.canvas.canvas.Canvas
+import com.github.karvozavr.canvas.canvas.CanvasPoint
+import com.github.karvozavr.canvas.canvas.PixelValue
+import com.github.karvozavr.canvas.canvas.SetPixelAt
+import com.github.karvozavr.canvas.canvas.row
+import com.github.karvozavr.canvas.canvas.col
 
 class FillAreaCommand internal constructor(
     val initialPoint: CanvasPoint,
@@ -57,10 +62,13 @@ class FillAreaCommand internal constructor(
             .forEach(queue::addLast)
     }
 
-    private fun canvasPointIfValid(row: Int, col: Int, canvas: Canvas): CanvasPoint? =
-        if (row > 0 && row <= canvas.height && col > 0 && col <= canvas.width) {
+    private fun canvasPointIfValid(row: Int, col: Int, canvas: Canvas): CanvasPoint? {
+        val rowIsValid = row > 0 && row <= canvas.height
+        val columnIsValid = col > 0 && col <= canvas.width
+        return if (rowIsValid && columnIsValid) {
             CanvasPoint(row.row, col.col)
         } else {
             null
         }
+    }
 }

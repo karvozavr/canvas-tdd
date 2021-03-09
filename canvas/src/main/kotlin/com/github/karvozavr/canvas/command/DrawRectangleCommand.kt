@@ -1,6 +1,10 @@
 package com.github.karvozavr.canvas.command
 
-import com.github.karvozavr.canvas.canvas.*
+import com.github.karvozavr.canvas.canvas.Canvas
+import com.github.karvozavr.canvas.canvas.CanvasPoint
+import com.github.karvozavr.canvas.canvas.PixelValue
+import com.github.karvozavr.canvas.canvas.row
+import com.github.karvozavr.canvas.canvas.col
 
 class DrawRectangleCommand internal constructor(
     val upperLeft: CanvasPoint,

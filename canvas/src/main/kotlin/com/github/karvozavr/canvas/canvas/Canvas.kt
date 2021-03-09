@@ -18,10 +18,11 @@ class Canvas internal constructor(
         ): Canvas {
             val pixelData = Array(height * width) { defaultPixelValue }
 
-            return if (width > 0 && height > 0)
+            return if (width > 0 && height > 0) {
                 Canvas(width, height, pixelData)
-            else
-                throw RuntimeException("Width and height of the canvas should be positive integers")
+            } else {
+                throw IllegalStateException("Width and height of the canvas should be positive integers")
+            }
         }
     }
 
@@ -63,12 +64,12 @@ class Canvas internal constructor(
     private fun validatePoint(canvasPoint: CanvasPoint) {
         val rowIsValid = canvasPoint.row.row in 1..height
         if (!rowIsValid) {
-            throw RuntimeException("Row values should be in range 1..height")
+            throw IllegalStateException("Row values should be in range 1..height")
         }
 
         val columnIsValid = canvasPoint.column.column in 1..width
         if (!columnIsValid) {
-            throw RuntimeException("Column values should be in range 1..width")
+            throw IllegalStateException("Column values should be in range 1..width")
         }
     }
 }

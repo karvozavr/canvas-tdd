@@ -1,6 +1,11 @@
 package com.github.karvozavr.canvas.command
 
-import com.github.karvozavr.canvas.canvas.*
+import com.github.karvozavr.canvas.canvas.Canvas
+import com.github.karvozavr.canvas.canvas.CanvasPoint
+import com.github.karvozavr.canvas.canvas.PixelValue
+import com.github.karvozavr.canvas.canvas.SetPixelAt
+import com.github.karvozavr.canvas.canvas.row
+import com.github.karvozavr.canvas.canvas.col
 
 data class DrawLineCommand internal constructor(
     val from: CanvasPoint,
@@ -20,7 +25,7 @@ data class DrawLineCommand internal constructor(
 
         private fun validate(from: CanvasPoint, to: CanvasPoint) {
             if (from.row != to.row && from.column != to.column) {
-                throw RuntimeException("Line should be either horizontal or vertical")
+                throw IllegalStateException("Line should be either horizontal or vertical")
             }
         }
     }

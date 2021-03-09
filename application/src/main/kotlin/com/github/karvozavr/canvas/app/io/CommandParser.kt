@@ -28,8 +28,10 @@ class CommandParser {
         }
     }
 
+    @Suppress("ReturnCount", "MagicNumber")
     private fun parseDrawLineCommand(tokens: List<String>): LineCommand? {
-        if (tokens.size != 5) return null
+        val numberOfTokens = 5
+        if (tokens.size != numberOfTokens) return null
 
         val aX = tokens[1].toIntOrNull() ?: return null
         val aY = tokens[2].toIntOrNull() ?: return null
@@ -46,8 +48,10 @@ class CommandParser {
         }
     }
 
+    @Suppress("ReturnCount", "MagicNumber")
     private fun parseDrawRectCommand(tokens: List<String>): Command? {
-        if (tokens.size != 5) return null
+        val numberOfTokens = 5
+        if (tokens.size != numberOfTokens) return null
 
         val aX = tokens[1].toIntOrNull() ?: return null
         val aY = tokens[2].toIntOrNull() ?: return null
@@ -64,8 +68,10 @@ class CommandParser {
         }
     }
 
+    @Suppress("ReturnCount", "MagicNumber")
     private fun parseBucketCommand(tokens: List<String>): BucketCommand? {
-        if (tokens.size != 4) return null
+        val numberOfTokens = 4
+        if (tokens.size != numberOfTokens) return null
 
         val x = tokens[1].toIntOrNull() ?: return null
         val y = tokens[2].toIntOrNull() ?: return null
@@ -79,8 +85,10 @@ class CommandParser {
         }
     }
 
+    @Suppress("ReturnCount", "MagicNumber")
     private fun parseCreateCanvasCommand(tokens: List<String>): CreateCanvasCommand? {
-        if (tokens.size != 3) return null
+        val numberOfTokens = 3
+        if (tokens.size != numberOfTokens) return null
 
         val width = tokens[1].toIntOrNull() ?: return null
         val height = tokens[2].toIntOrNull() ?: return null

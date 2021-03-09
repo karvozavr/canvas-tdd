@@ -1,6 +1,8 @@
 package com.github.karvozavr.canvas.app
 
+import arrow.core.Either
 import com.github.karvozavr.canvas.app.command.Command
+import com.github.karvozavr.canvas.app.command.CommandError
 import com.github.karvozavr.canvas.app.io.CommandParser
 import com.github.karvozavr.canvas.app.io.TextOutputReceiver
 import com.github.karvozavr.canvas.app.io.UserInputProvider
@@ -22,29 +24,27 @@ class CanvasCLIApplication(
         var applicationState = ApplicationState(null)
 
         while (true) {
-            val command = getCommandFromUser()
-            if (command == null) {
-                reportParsingError()
-                continue
-            }
-
-            val result = try {
-                command.execute(applicationState)
-            } catch (e: TerminationException) {
-                break
-            }
-
-            result
-                .mapLeft {
-                    textErrorOutputReceiver.println(it.errorText())
+            getCommandFromUser()?.let { command ->
+                try {
+                    val result = command.execute(applicationState)
+                    applicationState = processCommandResult(result) ?: applicationState
+                } catch (e: TerminationException) {
+                    return
                 }
-                .map {
-                    applicationState = it
-                    val canvasTextView = canvasPresenter.present(applicationState.canvas!!)
-                    textOutputReceiver.println(canvasTextView.text)
-                }
+            } ?: reportParsingError()
         }
     }
+
+    private fun processCommandResult(result: Either<CommandError, ApplicationState>): ApplicationState? =
+        result
+            .mapLeft {
+                textErrorOutputReceiver.println(it.errorText())
+            }
+            .map {
+                val canvasTextView = canvasPresenter.present(it.canvas!!)
+                textOutputReceiver.println(canvasTextView.text)
+                it
+            }.orNull()
 
     private fun reportParsingError() {
         textErrorOutputReceiver.println(INVALID_COMMAND_MESSAGE)

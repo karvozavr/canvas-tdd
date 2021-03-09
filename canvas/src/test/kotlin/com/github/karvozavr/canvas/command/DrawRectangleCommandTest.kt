@@ -1,6 +1,11 @@
 package com.github.karvozavr.canvas.command
 
-import com.github.karvozavr.canvas.canvas.*
+import com.github.karvozavr.canvas.canvas.CanvasPoint
+import com.github.karvozavr.canvas.canvas.PixelValue
+import com.github.karvozavr.canvas.canvas.row
+import com.github.karvozavr.canvas.canvas.col
+import com.github.karvozavr.canvas.canvas.x
+import com.github.karvozavr.canvas.canvas.y
 import com.github.karvozavr.canvas.defaultCanvasOfSize
 import com.github.karvozavr.canvas.renderer.AsciiCanvasRenderer
 import io.kotest.matchers.shouldBe
