@@ -11,7 +11,7 @@ import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.command.DrawRectangleCommand
 
-class RectCommand(
+data class RectCommand(
     private val oneCorner: CanvasPoint,
     private val otherCorner: CanvasPoint
 ) : Command {

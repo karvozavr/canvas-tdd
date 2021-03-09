@@ -11,7 +11,7 @@ import com.github.karvozavr.canvas.canvas.CanvasPoint
 import com.github.karvozavr.canvas.canvas.PixelValue
 import com.github.karvozavr.canvas.command.DrawLineCommand
 
-class LineCommand(
+data class LineCommand(
     private val from: CanvasPoint,
     private val to: CanvasPoint
 ) : Command {
