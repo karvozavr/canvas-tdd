@@ -13,5 +13,5 @@ unzip application/build/distributions/canvas-app.zip
 
 Run
 ```angular2html
-./canvas-app/bin/application
+./canvas-app/bin/canvas-app
 ```
