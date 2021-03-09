@@ -1,6 +1,5 @@
 import com.github.karvozavr.canvas.app.CanvasCLIApplication
 import com.github.karvozavr.canvas.app.io.CommandParser
-import com.github.karvozavr.canvas.app.io.StderrTextOutputReceiver
 import com.github.karvozavr.canvas.app.io.StdinUserInputProvider
 import com.github.karvozavr.canvas.app.io.StdoutTextOutputReceiver
 import com.github.karvozavr.canvas.app.view.AsciiFramedCanvasPresenter

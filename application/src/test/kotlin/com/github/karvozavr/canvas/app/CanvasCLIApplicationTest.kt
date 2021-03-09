@@ -57,63 +57,7 @@ internal class CanvasCLIApplicationTest {
             )
         )
 
-        val textOutputReceiver = TestTextOutputReceiver(
-            listOf(
-                CLI_PROMPT,
-                CLI_PROMPT,
-                """
-                    ----------------------
-                    |                    |
-                    |                    |
-                    |                    |
-                    |                    |
-                    ----------------------
-                
-                """.trimIndent(),
-                CLI_PROMPT,
-                """
-                    ----------------------
-                    |                    |
-                    |xxxxxx              |
-                    |                    |
-                    |                    |
-                    ----------------------
-
-                """.trimIndent(),
-                CLI_PROMPT,
-                """
-                    ----------------------
-                    |                    |
-                    |xxxxxx              |
-                    |     x              |
-                    |     x              |
-                    ----------------------
-                    
-                """.trimIndent(),
-                CLI_PROMPT,
-                """
-                    ----------------------
-                    |             xxxxx  |
-                    |xxxxxx       x   x  |
-                    |     x       xxxxx  |
-                    |     x              |
-                    ----------------------
-                    
-                """.trimIndent(),
-                CLI_PROMPT,
-                """
-                    ----------------------
-                    |oooooooooooooxxxxxoo|
-                    |xxxxxxooooooox   xoo|
-                    |     xoooooooxxxxxoo|
-                    |     xoooooooooooooo|
-                    ----------------------
-                    
-                """.trimIndent(),
-                CLI_PROMPT,
-                CLI_PROMPT
-            )
-        )
+        val textOutputReceiver = testTextOutputReceiver()
 
         val textErrorOutputReceiver = TestTextOutputReceiver(
             listOf(
@@ -132,4 +76,62 @@ internal class CanvasCLIApplicationTest {
 
         app.start()
     }
+
+    private fun testTextOutputReceiver() = TestTextOutputReceiver(
+        listOf(
+            CLI_PROMPT,
+            CLI_PROMPT,
+            """
+                        ----------------------
+                        |                    |
+                        |                    |
+                        |                    |
+                        |                    |
+                        ----------------------
+                    
+                    """.trimIndent(),
+            CLI_PROMPT,
+            """
+                        ----------------------
+                        |                    |
+                        |xxxxxx              |
+                        |                    |
+                        |                    |
+                        ----------------------
+    
+                    """.trimIndent(),
+            CLI_PROMPT,
+            """
+                        ----------------------
+                        |                    |
+                        |xxxxxx              |
+                        |     x              |
+                        |     x              |
+                        ----------------------
+                        
+                    """.trimIndent(),
+            CLI_PROMPT,
+            """
+                        ----------------------
+                        |             xxxxx  |
+                        |xxxxxx       x   x  |
+                        |     x       xxxxx  |
+                        |     x              |
+                        ----------------------
+                        
+                    """.trimIndent(),
+            CLI_PROMPT,
+            """
+                        ----------------------
+                        |oooooooooooooxxxxxoo|
+                        |xxxxxxooooooox   xoo|
+                        |     xoooooooxxxxxoo|
+                        |     xoooooooooooooo|
+                        ----------------------
+                        
+                    """.trimIndent(),
+            CLI_PROMPT,
+            CLI_PROMPT
+        )
+    )
 }

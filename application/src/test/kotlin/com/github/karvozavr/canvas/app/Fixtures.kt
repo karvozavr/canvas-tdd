@@ -3,7 +3,6 @@ package com.github.karvozavr.canvas.app
 import com.github.karvozavr.canvas.canvas.Canvas
 import com.github.karvozavr.canvas.canvas.PixelData
 import com.github.karvozavr.canvas.canvas.PixelValue
-import com.github.karvozavr.canvas.canvas.SetPixelAt
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 

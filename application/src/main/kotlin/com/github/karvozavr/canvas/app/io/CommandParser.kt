@@ -37,7 +37,9 @@ class CommandParser {
         val bX = tokens[3].toIntOrNull() ?: return null
         val bY = tokens[4].toIntOrNull() ?: return null
 
-        return if (aX > 0 && bX > 0 && aY > 0 && bY > 0) {
+        val aIsValid = aX > 0 && aY > 0
+        val bIsValid = bX > 0 && bY > 0
+        return if (aIsValid && bIsValid) {
             LineCommand(from = CanvasPoint.of(aX.x, aY.y), to = CanvasPoint.of(bX.x, bY.y))
         } else {
             null
@@ -53,7 +55,9 @@ class CommandParser {
         val bX = tokens[3].toIntOrNull() ?: return null
         val bY = tokens[4].toIntOrNull() ?: return null
 
-        return if (aX > 0 && bX > 0 && aY > 0 && bY > 0) {
+        val aIsValid = aX > 0 && aY > 0
+        val bIsValid = bX > 0 && bY > 0
+        return if (aIsValid && bIsValid) {
             RectCommand(oneCorner = CanvasPoint.of(aX.x, aY.y), otherCorner = CanvasPoint.of(bX.x, bY.y))
         } else {
             null
